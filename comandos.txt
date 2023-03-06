@@ -1,0 +1,51 @@
+1) Inicio el servidor en el puerto 8080 (modos FORK y CLUSTER)
+
+a. node server.js -p 8080
+b. node server.js -p 8080 -m FORK
+c. node server.js -p 8080 -m CLUSTER
+
+2) Inicio el servidor con FOREVER
+
+a. forever start server.js -w -p 8080
+b. forever start server.js -w -p 8080 -m FORK
+c. forever start server.js -w -p 8080 -m CLUSTER
+
+
+
+Listar todos los procesos activos con forever: forever list
+
+Detiene el porceso iniciado con FOREVER: forever stop <PID>
+
+3) Inicio el servidor con PM2
+
+a. En modo FORK
+pm2 start server.js --name="serverMode-FORK" --watch -- --port 8081
+
+b. En modo CLUSTER
+pm2 start server.js --name="serverMode-CLUSTER" --watch -i max -- 8082
+
+C. Listar los porcesos activos con PM2
+
+pm2 list   
+
+d. Finalizar un porceso especifico con PM2
+
+pm2 delete <app_name | namespace | id >
+
+e. Finalizar todos los procesos activos con PM2
+
+pm2 delete getAll
+
+4) NGINX
+
+A:    
+forever start server.js -p 8080 -m CLUSTER
+forever start server.js -p 8081 -m FORK
+NginxConfig: ./config/nginx1.conf
+
+B:
+forever start server.js -p 8085 -m FORK
+forever start server.js -p 8084 -m FORK
+forever start server.js -p 8083 -m FORK
+forever start server.js -p 8082 -m FORK
+NginxConfig: ./config/nginx2.conf

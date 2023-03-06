@@ -1,0 +1,66 @@
+div(class='container.mt-3')
+    div(class='jumbotron')     
+        form(action="/salir", method="get")
+            h1= saludo
+            button#salir.btn.btn-success.mt-3.mb-5 Salir
+        h2(style="color:blue;") Agregar Producto
+        br
+        form(action="/productos", method="post")
+            div(class="form-group")
+                label(for="nombre")
+                    b Nombre
+                input#nombre.form-control(type="text", name="nombre")
+            div(class="form-group")
+                label(for="descripcion")
+                    b Descripcion
+                input#descripcion.form-control(type="text", name="descripcion")
+            div(class="form-group")
+                label(for="codigo")
+                    b Codigo
+                input#codigo.form-control(type="text", name="codigo")
+            div(class="form-group")
+                label(for="precio")
+                    b Precio
+                input#precio.form-control(type="number", name="precio")
+            div(class="form-group")
+                label(for="stock")
+                    b Stock
+                input#stock.form-control(type="number", name="stock")
+            div(class="form-group")
+                label(for="foto")
+                    b Foto
+                input#foto.form-control(type="text", name="foto")
+            button.btn.btn-success.mt-3.mb-5 Enviar
+        h2(style="color:crimson;") Historial
+        if productos && productos.length > 0
+            div(class="table-responsive")
+                table.table.table-dark
+                    tr(style="color: yellow;")
+                        th Nombre
+                        th Descripcion
+                        th Codigo
+                        th Precio
+                        th Stock
+                        th Foto
+                    each val in productos
+                        tr
+                            td= val.nombre
+                            td= val.descripcion
+                            td= val.codigo
+                            td= val.precio
+                            td= val.stock
+                            td= val.foto
+        else
+            h3(class="alert alert-danger") Sin productos
+        h1 Chat
+        div(id="compresion")
+        div(id="messages")
+        form(onsubmit='return addMessage()')
+            input#nombreChat.form-control(type='text' placeholder='Tu nombre')
+            input#apellido.form-control(type='text' placeholder='Tu apellido')
+            input#email.form-control(type='email' placeholder='Tu email')
+            input#alias.form-control(type='text' placeholder='Tu alias')
+            input#avatar.form-control(type='text' placeholder='Tu avatar')
+            input#edad.form-control(type='number' placeholder='Tu edad')
+            input#text.form-control(type='text' placeholder='Cuentanos algo...')
+            input.btn.btn-success.mt-3.mb-5(type='submit' value='Enviar')
