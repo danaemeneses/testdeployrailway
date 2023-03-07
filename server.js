@@ -31,7 +31,7 @@ const config = {
 };
 
 export const args = parseArgs(process.argv.slice(2), config);
-export const PORT = args.port || 4001;
+export const PORT = process.env.PORT || 8081
 
 const numCPUs = os.cpus().length
 
@@ -142,7 +142,7 @@ if (args.modo == "CLUSTER" && cluster.isPrimary) {
     console.log(util.inspect(objeto,false,12,true));
     };
 
-    httpServer.listen(port, () => {
-    console.log(`RUN http://localhost:${port}/ingresar processID: ${process.pid}`);
+    httpServer.listen(PORT, () => {
+    console.log(`RUN http://localhost:${PORT}/ingresar processID: ${process.pid}`);
     });
 }
